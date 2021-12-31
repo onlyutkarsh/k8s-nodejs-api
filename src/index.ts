@@ -3,20 +3,23 @@ import cors from 'cors';
 import helmet from 'helmet';
 import express, { Request, Response } from 'express';
 import { BaseItem } from './models/BaseItem';
-import { timeStamp } from 'console';
 import { errorHandler } from './middleware/error-middleware';
 import { notFoundHandler } from './middleware/notfound-middleware';
+import morgan from 'morgan';
 
 dotenv.config();
 
 if (!process.env.PORT) {
+    console.log('PORT not defined');
     process.exit(1);
 }
 
+console.log(`PORT: ${process.env.PORT}`);
 const PORT: number = parseInt(process.env.PORT as string, 10);
 
 const app = express();
 
+app.use(morgan('combined'));
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
@@ -26,6 +29,7 @@ app.listen(PORT, () => {
 });
 
 app.post('/api/dummy', (req: Request, res: Response) => {
+    console.log(`${req.url}`);
     try {
         var body: BaseItem = req.body;
         if (!body.id) {

@@ -4,6 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "init": "rm -rf node_modules && npm install",
+    "compile": "rm -rf out && tsc -p .",
+    "docker:build": "docker build -t k8s-nodejs-api .",
+    "docker:run": "docker run -d -e PORT=8080 -p 8080:8080 onlyutkarsh/k8s-nodejs-api",
+    "docker:clean": "docker system prune -f",
     "dev": "ts-node-dev --respawn --pretty --transpile-only src/index.ts"
   },
   "keywords": [],
@@ -13,11 +18,13 @@
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.2",
-    "helmet": "^4.6.0"
+    "helmet": "^4.6.0",
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
+    "@types/morgan": "^1.9.3",
     "@types/node": "^17.0.5",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.5.4"
