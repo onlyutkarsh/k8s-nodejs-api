@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mynodeapi-dep
+  labels:
+    app: dep-k8s-nodejs-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: pod-k8s-nodejs-api
+  template:
+    metadata:
+      labels:
+        app: pod-k8s-nodejs-api
+    spec:
+      containers:
+        - name: k8s-nodejs-api
+          image: onlyutkarsh/k8s-nodejs-api
+          ports:
+            - containerPort: 80
+          env:
+            - name: PORT
+              value: "80"
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 100m
+              memory: 100Mi

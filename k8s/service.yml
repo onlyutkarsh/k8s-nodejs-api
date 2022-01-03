@@ -1,0 +1,14 @@
+#nodeport service
+apiVersion: v1
+kind: Service
+metadata:
+  name: mynodeapi-svc
+  labels:
+    app: svc-k8s-nodejs-api
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      targetPort: 80
+  selector:
+    app: pod-k8s-nodejs-api
