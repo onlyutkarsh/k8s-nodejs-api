@@ -5,7 +5,7 @@ metadata:
   labels:
     app: dep-k8s-nodejs-api
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: pod-k8s-nodejs-api
