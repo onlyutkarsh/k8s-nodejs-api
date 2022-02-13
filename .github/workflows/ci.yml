@@ -34,4 +34,4 @@ jobs:
 
       - name: run conftest
         run: |
-          conftest test {{github.workspace}}/k8s
+          conftest test ${{github.workspace}}/k8s
