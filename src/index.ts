@@ -46,5 +46,37 @@ app.post("/api/dummy", (req: Request, res: Response) => {
   }
 });
 
+app.get("/api/health", (req: Request, res: Response) => {
+  console.log(`${req.url}`);
+  res.status(200).send({
+    status: "UP",
+    checks: [
+      { name: "Database connections health check", status: "UP" },
+      {
+        name: "RabbitMQ consumer health check",
+        status: "UP",
+        data: {
+          "pro-cos-business-low-priority-queue": "UP",
+          "pro-cos-business-high-priority-queue": "UP",
+          "pro-device-response-queue": "UP",
+          Connection: "UP",
+          "pro-retrieve-certificates-queue": "UP",
+          "pro-credentials-update-queue": "UP",
+        },
+      },
+      {
+        name: "RabbitMQ publisher health check",
+        status: "UP",
+        data: {
+          "task-executor-exchange": "UP",
+          Connection: "UP",
+          "outgoing-exchange": "UP",
+        },
+      },
+      { name: "Cryptography health check", status: "UP" },
+    ],
+  });
+});
+
 app.use(errorHandler);
 app.use(notFoundHandler);

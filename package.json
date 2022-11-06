@@ -6,9 +6,9 @@
   "scripts": {
     "init": "rm -rf node_modules && npm install",
     "compile": "rm -rf out && tsc -p .",
-    "docker:build": "docker build -t onlyutkarsh/k8s-nodejs-api .",
-    "docker:run": "docker run -d -e PORT=8080 -p 8080:8080 onlyutkarsh/k8s-nodejs-api",
-    "docker:clean": "docker system prune -f",
+    "docker:build": "podman build -t onlyutkarsh/k8s-nodejs-api .",
+    "docker:run": "podman run -d -e PORT=8080 -p 8080:8080 onlyutkarsh/k8s-nodejs-api",
+    "docker:clean": "podman system prune -f",
     "dev": "ts-node-dev --respawn --pretty --transpile-only src/index.ts"
   },
   "keywords": [],
